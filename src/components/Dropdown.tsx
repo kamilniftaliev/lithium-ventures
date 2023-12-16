@@ -2,8 +2,6 @@ import { useOutsideClick } from "@/hooks";
 import { StyledDropdown } from "@/styles";
 import { DropdownItem } from "@/types";
 import {
-  Dispatch,
-  SetStateAction,
   useCallback,
   useRef,
   useState,
@@ -13,7 +11,7 @@ import {
 type Props = {
   items: DropdownItem[];
   selectedItem: DropdownItem;
-  onSelect: Dispatch<SetStateAction<DropdownItem>>;
+  onSelect: (item: DropdownItem) => void;
 };
 
 export function Dropdown({ items, selectedItem, onSelect }: Props) {

@@ -40,3 +40,16 @@ export const SectionTitleContent = styled.div`
   width: 100%;
   margin-left: 1rem;
 `
+
+export const ErrorMessage = styled.p`
+  background-color: #ffc7c7;
+  text-align: center;
+  color: #9d0202;
+  border-radius: 4px;
+  padding: 8px 50px;
+  width: fit-content;
+  font-size: 14px;
+  left: 0;
+  right: 0;
+  margin: 30px auto;
+`

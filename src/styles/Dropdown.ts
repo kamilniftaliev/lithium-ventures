@@ -2,7 +2,7 @@ import Image from "next/image";
 import styled, { css } from "styled-components";
 
 const commonStyles = css`
-  border: 1px solid #bdbdbd;
+  border: 1px solid #d3d3d3;
   border-radius: 4px;
 `;
 
@@ -23,7 +23,7 @@ const itemStyles = css`
 export const Container = styled.div`
   position: relative;
   font-size: 12px;
-  min-width: 10rem;
+  min-width: 150px;
   user-select: none;
 `;
 
@@ -43,6 +43,7 @@ export const OptionsContainer = styled.div`
   position: absolute;
   inset: 0;
   top: 2.5rem;
+  z-index: 1;
   height: max-content;
   background-color: #fff;
   box-shadow: 0 2px 5px rgba(0,0,0,.1);

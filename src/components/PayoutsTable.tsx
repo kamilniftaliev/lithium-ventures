@@ -8,10 +8,12 @@ type Props = {
   data: PayoutsServerResponse;
 };
 
-export function PayoutsTable({ isLoading, data }: Props) {
-  const { metadata, data: payouts } = data;
+export function PayoutsTable({ isLoading, data: { data: payouts } }: Props) {
+  const noResults = !payouts.length
 
-  return (
+  return noResults ? (
+    <Table.NoResults>No results</Table.NoResults>
+  ) : (
     <Table.Container>
       <thead>
         <tr>
@@ -46,7 +48,7 @@ export function PayoutsTable({ isLoading, data }: Props) {
                 )}
               </Table.UsernameCell>
               <Table.TimeCell>
-                {isLoading ? <Skeleton /> : <>{formatTime(dateAndTime)}</>}
+                {isLoading ? <Skeleton /> : formatTime(dateAndTime)}
               </Table.TimeCell>
               <Table.StatusCell>
                 {isLoading ? (

@@ -2,6 +2,7 @@ import styled from "styled-components";
 import Image from "next/image";
 import { STATUS_COLORS } from "@/constants";
 import { StatusValues } from "@/types";
+import { ErrorMessage } from "./Page";
 
 export const Container = styled.table`
   margin-top: 2rem;
@@ -60,4 +61,9 @@ export const ValueCell = styled.td`
 
 export const Avatar = styled(Image)`
   border-radius: 50%;
+`
+
+export const NoResults = styled(ErrorMessage)`
+  background-color: #ffefc3;
+  color: #865100;
 `

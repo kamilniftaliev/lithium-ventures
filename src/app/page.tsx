@@ -1,32 +1,33 @@
 "use client";
 
-import { Dropdown, PayoutsTable, SectionTitle } from "@/components";
+import {
+  Dropdown,
+  Pagination,
+  PayoutsTable,
+  Search,
+  SectionTitle,
+} from "@/components";
 import { ITEMS_LIMIT, PLACEHOLDER_PAYOUTS } from "@/constants";
+import { useQuery } from "@/hooks";
 import { Page } from "@/styles";
-import { PayoutsServerResponse } from "@/types";
-import { useEffect, useState } from "react";
 
 export default function Home() {
-  const [payoutsData, setPayoutsData] =
-    useState<PayoutsServerResponse | null>(null);
-  const [isLoadingPayouts, setIsLoadingPayouts] = useState(true);
-  const [limit, setLimit] = useState(ITEMS_LIMIT[0]);
+  const {
+    payoutsData,
+    isLoading,
+    limit,
+    page,
+    errorMessage,
+    setPage,
+    query,
+    onLimitSelect,
+  } = useQuery()
 
-  useEffect(() => {
-    setIsLoadingPayouts(true);
-
-    (async () => {
-      const response = await fetch(
-        `https://theseus-staging.lithium.ventures/api/v1/analytics/tech-test/payouts?limit=${limit.value}`
-      );
-      const data = (await response.json()) as PayoutsServerResponse;
-
-      setPayoutsData(data);
-      setIsLoadingPayouts(false);
-    })();
-  }, [limit]);
-
-  const canShowPayouts = !isLoadingPayouts && payoutsData;
+  const canShowPayouts = !isLoading && !!payoutsData;
+  const canShowPagination =
+    canShowPayouts &&
+    // If showing less than total count of items
+    payoutsData.metadata.limit < payoutsData.metadata.totalCount;
 
   return (
     <Page.Container>
@@ -37,13 +38,28 @@ export default function Home() {
           <Dropdown
             items={ITEMS_LIMIT}
             selectedItem={limit}
-            onSelect={setLimit}
+            onSelect={onLimitSelect}
           />
         </SectionTitle>
-        <PayoutsTable
-          isLoading={isLoadingPayouts}
-          data={canShowPayouts ? payoutsData : PLACEHOLDER_PAYOUTS}
-        />
+        <Search onSearch={query} />
+        {errorMessage ? (
+          <Page.ErrorMessage>{errorMessage}</Page.ErrorMessage>
+        ) : (
+          <>
+            <PayoutsTable
+              isLoading={isLoading}
+              data={canShowPayouts ? payoutsData : PLACEHOLDER_PAYOUTS}
+            />
+
+            {canShowPagination && (
+              <Pagination
+                currentPage={page}
+                {...payoutsData?.metadata}
+                onSelect={setPage}
+              />
+            )}
+          </>
+        )}
       </Page.Body>
     </Page.Container>
   );

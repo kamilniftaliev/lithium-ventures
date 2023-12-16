@@ -20,3 +20,6 @@ export const ITEMS_LIMIT = [
     label: 'Show 100 items',
   },
 ]
+
+export const BASE_PAYOUTS_URL =
+  "https://theseus-staging.lithium.ventures/api/v1/analytics/tech-test/";
