@@ -15,7 +15,7 @@ export const Container = styled.table`
   }
 
   th, td {
-    padding: .7rem 1rem;
+    padding: 10px 15px;
   }
 
   th {
@@ -45,8 +45,17 @@ export const UsernameCell = styled.td`
   gap: 12px;
 `
 
+export const TimeCell = styled.td`
+  width: 30%;
+`
+
+export const StatusCell = styled.td`
+  width: 15%;
+`
+
 export const ValueCell = styled.td`
   color: #1A1D1F;
+  width: 15%;
 `
 
 export const Avatar = styled(Image)`

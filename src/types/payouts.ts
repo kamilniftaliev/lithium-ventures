@@ -1,11 +1,11 @@
 export type PAYOUTS = Array<{
   dateAndTime: string;
-  status: "Pending" | "Completed";
+  status: StatusValues;
   username: string;
   value: string;
 }>;
 
-export type PAYOUTS_SERVER_RESPONSE = {
+export type PayoutsServerResponse = {
   metadata: {
     page: number;
     limit: number;
@@ -14,7 +14,10 @@ export type PAYOUTS_SERVER_RESPONSE = {
   data: PAYOUTS
 }
 
-export type StatusValues = 'Completed' | 'Pending';
+export enum StatusValues {
+  Completed = 'Completed',
+  Pending = 'Pending',
+}
 
 export type StatusLabels = {
   [key in StatusValues]: string

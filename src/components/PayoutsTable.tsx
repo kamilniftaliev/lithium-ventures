@@ -1,11 +1,14 @@
 import { STATUS_LABELS, TABLE_AVATAR_SIZE } from "@/constants";
-import { Table } from "@/styles";
-import { PAYOUTS_SERVER_RESPONSE } from "@/types";
+import { Skeleton, Table } from "@/styles";
+import { PayoutsServerResponse } from "@/types";
 import { formatTime } from "@/utils";
 
-type Props = { data: PAYOUTS_SERVER_RESPONSE };
+type Props = {
+  isLoading: boolean;
+  data: PayoutsServerResponse;
+};
 
-export function PayoutsTable({ data }: Props) {
+export function PayoutsTable({ isLoading, data }: Props) {
   const { metadata, data: payouts } = data;
 
   return (
@@ -20,26 +23,45 @@ export function PayoutsTable({ data }: Props) {
       </thead>
       <tbody>
         {payouts.map(({ status, value, username, dateAndTime }) => {
-          const key = username + dateAndTime;
+          const key = value + username + dateAndTime;
 
           return (
             <tr key={key}>
               <Table.UsernameCell>
-                <Table.Avatar
-                  src={`https://loremflickr.com/${TABLE_AVATAR_SIZE}/${TABLE_AVATAR_SIZE}/face?random=${key}`}
-                  width={TABLE_AVATAR_SIZE}
-                  height={TABLE_AVATAR_SIZE}
-                  alt={username}
-                />
-                <span>{username}</span>
+                {isLoading ? (
+                  <>
+                    <Skeleton $circle />
+                    <Skeleton />
+                  </>
+                ) : (
+                  <>
+                    <Table.Avatar
+                      src={`https://loremflickr.com/${TABLE_AVATAR_SIZE}/${TABLE_AVATAR_SIZE}/face?random=${key}`}
+                      width={TABLE_AVATAR_SIZE}
+                      height={TABLE_AVATAR_SIZE}
+                      alt={username}
+                    />
+                    <span>{username}</span>
+                  </>
+                )}
               </Table.UsernameCell>
-              <td>{formatTime(dateAndTime)}</td>
-              <td>
-                <Table.Status $status={status}>
-                  {STATUS_LABELS[status] || status}
-                </Table.Status>
-              </td>
-              <Table.ValueCell>{value}</Table.ValueCell>
+              <Table.TimeCell>
+                {isLoading ? <Skeleton /> : <>{formatTime(dateAndTime)}</>}
+              </Table.TimeCell>
+              <Table.StatusCell>
+                {isLoading ? (
+                  <Skeleton />
+                ) : (
+                  <>
+                    <Table.Status $status={status}>
+                      {STATUS_LABELS[status] || status}
+                    </Table.Status>
+                  </>
+                )}
+              </Table.StatusCell>
+              <Table.ValueCell>
+                {isLoading ? <Skeleton /> : <>{value}</>}
+              </Table.ValueCell>
             </tr>
           );
         })}
