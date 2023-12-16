@@ -16,7 +16,7 @@ export const Body = styled.div`
   margin-top: 68px;
 `
 
-export const SectionTitleContainer = styled.p`
+export const SectionTitleContainer = styled.div`
   display: flex;
   align-items: center;
   margin-top: 2rem;
@@ -33,6 +33,10 @@ export const SectionColor = styled.span`
   background-color: #999dff;
 `
 
-export const SectionTitleText = styled.span`
+export const SectionTitleContent = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
   margin-left: 1rem;
 `

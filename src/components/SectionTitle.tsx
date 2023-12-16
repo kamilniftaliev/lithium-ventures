@@ -5,7 +5,7 @@ export function SectionTitle({ children }: PropsWithChildren) {
   return (
     <Page.SectionTitleContainer>
       <Page.SectionColor />
-      <Page.SectionTitleText>{children}</Page.SectionTitleText>
+      <Page.SectionTitleContent>{children}</Page.SectionTitleContent>
     </Page.SectionTitleContainer>
   );
 }
