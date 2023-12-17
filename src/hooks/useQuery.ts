@@ -25,13 +25,13 @@ export function useQuery() {
       })
         .then((data) => {
           setPayoutsData(data);
+          setErrorMessage('')
         })
         .catch((error: Error) => {
           setErrorMessage(error.message);
         })
         .finally(() => {
           setIsLoadingPayouts(false);
-          setErrorMessage('')
         });
     },
     [limit.value, page]

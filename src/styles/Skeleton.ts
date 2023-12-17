@@ -16,9 +16,9 @@ export const Skeleton = styled.div<{
   cursor: progress; 
   background: 
     linear-gradient(0.25turn, transparent, #fff, transparent),
-    linear-gradient(#eee, #eee),
-    radial-gradient(38px circle at 19px 19px, #eee 50%, transparent 51%),
-    linear-gradient(#eee, #eee);  
+    linear-gradient(${({ theme }) => theme.colors.bg.highlighted}, ${({ theme }) => theme.colors.bg.highlighted}),
+    radial-gradient(38px circle at 19px 19px, ${({ theme }) => theme.colors.bg.highlighted} 50%, transparent 51%),
+    linear-gradient(${({ theme }) => theme.colors.bg.highlighted}, ${({ theme }) => theme.colors.bg.highlighted});  
   background-repeat: no-repeat;
   background-size: 315px 250px, 315px 180px, 100px 100px, 225px 30px; 
   background-position: -315px 0, 0 0, 0px 190px, 50px 195px; 

@@ -7,11 +7,6 @@ export const STATUS_LABELS = {
   Pending: "Pending",
 } as StatusLabels;
 
-export const STATUS_COLORS: StatusLabels = {
-  Pending: "#6F767E66",
-  Completed: "#60CA57",
-};
-
 export const PLACEHOLDER_PAYOUTS = {
   metadata: {
     page: 1,

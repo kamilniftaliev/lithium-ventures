@@ -1,18 +1,17 @@
 import styled from "styled-components";
 import Image from "next/image";
-import { STATUS_COLORS } from "@/constants";
 import { StatusValues } from "@/types";
 import { ErrorMessage } from "./Page";
 
 export const Container = styled.table`
   margin-top: 2rem;
   font-size: 12px;
-  color: #6F767E;
+  color: ${({ theme }) => theme.colors.text.secondary};
   border-spacing: 0;
   width: 100%;
   
   tr:nth-child(even) {
-    background-color: #F4F4F480;
+    background-color: ${({ theme }) => theme.colors.bg.tableRow};
   }
 
   th, td {
@@ -34,10 +33,10 @@ export const Container = styled.table`
 `
 
 export const Status = styled.span<{ $status: StatusValues }>`
-  background-color: ${({ $status }) => STATUS_COLORS[$status]};
+  background-color: ${({ $status, theme }) => theme.colors.status[$status]};
   padding: 2px 8px;
   border-radius: 5px;
-  color: #1A1D1F;
+  color: ${({ theme }) => theme.colors.text.primary};
 `
 
 export const UsernameCell = styled.td`
@@ -55,7 +54,7 @@ export const StatusCell = styled.td`
 `
 
 export const ValueCell = styled.td`
-  color: #1A1D1F;
+  color: ${({ theme }) => theme.colors.text.primary};
   width: 15%;
 `
 
@@ -64,6 +63,6 @@ export const Avatar = styled(Image)`
 `
 
 export const NoResults = styled(ErrorMessage)`
-  background-color: #ffefc3;
-  color: #865100;
+  background-color: ${({ theme }) => theme.colors.bg.warning};
+  color: ${({ theme }) => theme.colors.text.warning};
 `

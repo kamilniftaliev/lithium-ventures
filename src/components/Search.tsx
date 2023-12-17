@@ -32,8 +32,8 @@ export function Search({ onSearch }: Props) {
     <StyledSearch.Container>
       <StyledSearch.SearchIcon
         src="/icons/search.svg"
-        width={14}
-        height={14}
+        width={18}
+        height={18}
         alt="Search"
       />
       <StyledSearch.Input

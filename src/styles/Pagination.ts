@@ -7,16 +7,16 @@ export const Container = styled.div`
   justify-content: space-between;
   gap: 10px;
   margin: 32px auto;
-  border: 1px solid #d3d3d3;
+  border: 1px solid ${({ theme }) => theme.colors.border.default};
   width: 130px;
   border-radius: 4px;
   font-size: 12px;
-  color: #707070;
+  color: ${({ theme }) => theme.colors.text.secondary};
   cursor: default;
 
   &:hover {
-    border-color: #6c72ff;
-    box-shadow: 0 2px 5px rgba(0,0,0,.1);
+    border-color: ${({ theme }) => theme.colors.border.hovered};
+    box-shadow: ${({ theme }) => theme.shadows.xs};
   }
 `;
 
@@ -29,10 +29,12 @@ export const Item = styled.div<{
   cursor: pointer;
   font-size: 12px;
 
-  ${({ $isNextPageBtn }) =>
+  ${({ $isNextPageBtn, theme }) =>
     $isNextPageBtn
-      ? "border-left: 1px solid #d3d3d3;"
-      : "border-right: 1px solid #d3d3d3;"}
+      ? `border-left: 1px solid ${theme.colors.border.default};`
+      : `border-right: 1px solid ${theme.colors.border.default};`}
+
+  ${({ theme }) => theme.isDark && 'filter: invert(100%);'}
 `;
 
 export const ArrowIcon = styled(Image)<{

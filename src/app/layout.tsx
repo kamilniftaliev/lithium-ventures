@@ -4,9 +4,9 @@ import StyledComponentsRegistry from "@/lib/registry";
 
 const inter = Inter({
   subsets: ["latin"],
-  display: 'swap',
-  variable: '--font-poppins',
-  weight: ['400', '500', '600']
+  display: "swap",
+  variable: "--font-poppins",
+  weight: ["400", "500", "600"],
 });
 
 export const metadata: Metadata = {

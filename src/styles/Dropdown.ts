@@ -2,7 +2,7 @@ import Image from "next/image";
 import styled, { css } from "styled-components";
 
 const commonStyles = css`
-  border: 1px solid #d3d3d3;
+  border: 1px solid ${({ theme }) => theme.colors.border.default};
   border-radius: 4px;
 `;
 
@@ -13,10 +13,10 @@ const itemStyles = css`
   gap: 10px;
   padding: 0 10px;
   cursor: pointer;
-  color: #707070;
+  color: ${({ theme }) => theme.colors.text.secondary};
 
   &:hover {
-    color: #000;
+    color: ${({ theme }) => theme.colors.text.primary};
   }
 `;
 
@@ -32,8 +32,8 @@ export const SelectedItem = styled.div`
   ${itemStyles}
 
   &:hover {
-    border-color: #6c72ff;
-    box-shadow: 0 2px 5px rgba(0,0,0,.1);
+    border-color: ${({ theme }) => theme.colors.border.hovered};
+    box-shadow: ${({ theme }) => theme.shadows.xs};
   }
 `;
 
@@ -45,8 +45,8 @@ export const OptionsContainer = styled.div`
   top: 2.5rem;
   z-index: 1;
   height: max-content;
-  background-color: #fff;
-  box-shadow: 0 2px 5px rgba(0,0,0,.1);
+  background-color: ${({ theme }) => theme.colors.bg.primary};
+  box-shadow: ${({ theme }) => theme.shadows.xs};
 `;
 
 export const Option = styled.div`
@@ -58,6 +58,7 @@ export const ArrowIcon = styled(Image)<{
 }>`
   opacity: 0.4;
   ${({ $isFlipped }) => $isFlipped && "rotate: 180deg;"}
+  ${({ theme }) => theme.isDark && 'filter: invert(100%);'}
 `;
 
 export const OptionsContainerArrow = styled(ArrowIcon)`
@@ -66,4 +67,4 @@ export const OptionsContainerArrow = styled(ArrowIcon)`
   right: 0;
   top: -8px;
   margin: auto;
-`
+`;
