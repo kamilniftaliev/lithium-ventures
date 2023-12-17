@@ -42,7 +42,7 @@ export function useQuery() {
     setLimit(limit);
     setPage(1);
     query()
-    window.localStorage.setItem('limit', limit.value)
+    localStorage.setItem('limit', limit.value)
   }, [query]);
 
   return {

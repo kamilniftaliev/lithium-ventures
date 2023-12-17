@@ -11,11 +11,11 @@ import {
 import { ITEMS_LIMIT, PLACEHOLDER_PAYOUTS } from "@/constants";
 import { useQuery } from "@/hooks";
 import { GlobalStyles, Page, darkTheme, lightTheme } from "@/styles";
-import { useState } from "react";
+import { useLayoutEffect, useState } from "react";
 import { ThemeProvider } from "styled-components";
 
 export default function Home() {
-  const [isDarkTheme, setDarkTheme] = useState(window.localStorage.getItem('theme') === 'dark')
+  const [isDarkTheme, setDarkTheme] = useState(false)
   const {
     payoutsData,
     isLoading,
@@ -26,6 +26,13 @@ export default function Home() {
     query,
     onLimitSelect,
   } = useQuery();
+
+  useLayoutEffect(() => {
+    const isDarkMode = localStorage.getItem('theme') === 'dark'
+  
+    setDarkTheme(isDarkMode)
+  }, [])
+  
 
   const { totalCount = 0 } = payoutsData?.metadata || {}
   const canShowPayouts = !isLoading && !!payoutsData;

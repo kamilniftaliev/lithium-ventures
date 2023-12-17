@@ -9,7 +9,7 @@ type Props = {
 export function ThemeToggler({ isDark, toggle }: Props) {
   const onClick = useCallback(
     () => {
-      window.localStorage.setItem('theme', isDark ? 'light' : 'dark')
+      localStorage.setItem('theme', isDark ? 'light' : 'dark')
       toggle(isDark => !isDark);
     },
     [isDark, toggle],
