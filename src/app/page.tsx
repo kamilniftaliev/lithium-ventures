@@ -15,8 +15,7 @@ import { useState } from "react";
 import { ThemeProvider } from "styled-components";
 
 export default function Home() {
-  console.log('localStorage.getItem(theme)', localStorage.getItem('theme'))
-  const [isDarkTheme, setDarkTheme] = useState(localStorage.getItem('theme') === 'dark')
+  const [isDarkTheme, setDarkTheme] = useState(window.localStorage.getItem('theme') === 'dark')
   const {
     payoutsData,
     isLoading,
