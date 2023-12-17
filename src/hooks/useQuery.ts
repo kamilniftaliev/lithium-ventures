@@ -10,7 +10,8 @@ export function useQuery() {
     null
   );
   const [isLoading, setIsLoadingPayouts] = useState(true);
-  const [limit, setLimit] = useState(ITEMS_LIMIT[0]);
+  const storedLimit = ITEMS_LIMIT.find(i => i.value === localStorage.getItem('limit')) || ITEMS_LIMIT[0]
+  const [limit, setLimit] = useState(storedLimit);
   const [page, setPage] = useState(1);
   const [errorMessage, setErrorMessage] = useState("");
 
@@ -41,6 +42,7 @@ export function useQuery() {
     setLimit(limit);
     setPage(1);
     query()
+    localStorage.setItem('limit', limit.value)
   }, [query]);
 
   return {

@@ -15,7 +15,8 @@ import { useState } from "react";
 import { ThemeProvider } from "styled-components";
 
 export default function Home() {
-  const [isDarkTheme, setDarkTheme] = useState(false)
+  console.log('localStorage.getItem(theme)', localStorage.getItem('theme'))
+  const [isDarkTheme, setDarkTheme] = useState(localStorage.getItem('theme') === 'dark')
   const {
     payoutsData,
     isLoading,
@@ -27,11 +28,12 @@ export default function Home() {
     onLimitSelect,
   } = useQuery();
 
+  const { totalCount = 0 } = payoutsData?.metadata || {}
   const canShowPayouts = !isLoading && !!payoutsData;
   const canShowPagination =
     canShowPayouts &&
     // If showing less than total count of items
-    payoutsData.metadata.limit < payoutsData.metadata.totalCount;
+    payoutsData.metadata.limit < totalCount;
 
   return (
     <ThemeProvider theme={isDarkTheme ? darkTheme : lightTheme}>
@@ -41,7 +43,7 @@ export default function Home() {
         <Page.Title>Payouts</Page.Title>
         <Page.Body>
           <SectionTitle>
-            <span>Payout History</span>
+            <span>Payout History {!!totalCount && `(Total: ${totalCount})`}</span>
             <Dropdown
               items={ITEMS_LIMIT}
               selectedItem={limit}

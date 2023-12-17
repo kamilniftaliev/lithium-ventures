@@ -1,5 +1,5 @@
 import { StyledThemeToggler } from "@/styles";
-import { Dispatch, SetStateAction } from "react";
+import { Dispatch, SetStateAction, useCallback } from "react";
 
 type Props = {
   isDark: boolean;
@@ -7,8 +7,17 @@ type Props = {
 };
 
 export function ThemeToggler({ isDark, toggle }: Props) {
+  const onClick = useCallback(
+    () => {
+      localStorage.setItem('theme', isDark ? 'light' : 'dark')
+      toggle(isDark => !isDark);
+    },
+    [isDark, toggle],
+  )
+  
+
   return (
-    <StyledThemeToggler.Button onClick={() => toggle(isDark => !isDark)}>
+    <StyledThemeToggler.Button onClick={onClick}>
       <StyledThemeToggler.Icon
         src={`/icons/${isDark ? "sun" : "moon"}.svg`}
         width={24}
